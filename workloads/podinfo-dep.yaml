@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: podinfo
-  namespace: demo
+  namespace: default
   labels:
     app: podinfo
   annotations:
@@ -34,7 +34,7 @@ spec:
         - "1"
       containers:
       - name: podinfod
-        image: stefanprodan/podinfo:3.1.0
+        image: twreddick/podinfo:3.1.0
         imagePullPolicy: IfNotPresent
         ports:
           - name: http
@@ -58,6 +58,9 @@ spec:
         env:
           - name: PODINFO_UI_COLOR
             value: "#34577c"
+        env:
+          - name: PODINFO_UI_MESSAGE
+            value: "Welcome to Flux"
         livenessProbe:
           httpGet:
             path: /healthz
